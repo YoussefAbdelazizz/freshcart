@@ -1,0 +1,75 @@
+<section>
+    <div class="container mx-auto w-full">
+        <div class="flex flew-wrap">
+            <div class="w-full sm:w-full md:w-1/2 lg:w-3/4">
+                
+                <owl-carousel-o [options]="mainoptionsOptions">
+                  <ng-template carouselSlide><img src="./images/img1.avif" class="h-80" alt=""></ng-template>  
+                  <ng-template carouselSlide><img src="./images/img2.avif" class="h-80" alt=""></ng-template>  
+                  <ng-template carouselSlide><img src="./images/img3.avif" class="h-80" alt=""></ng-template>  
+                  <ng-template carouselSlide><img src="./images/img4.avif" class="h-80" alt=""></ng-template>  
+                  <ng-template carouselSlide><img src="./images/img5.avif" class="h-80" alt=""></ng-template>  
+                  <ng-template carouselSlide><img src="./images/img6.avif" class="h-80" alt=""></ng-template>  
+                  <ng-template carouselSlide><img src="./images/img7.avif" class="h-80" alt=""></ng-template>  
+                  
+                </owl-carousel-o>
+                
+            </div>
+            <div class="w-full sm:w-full md:w-1/2 lg:w-1/4">
+                <div><img src="./images/slider-image-1.jpeg" class="h-40" alt=""></div>
+                <div><img src="./images/slider-image-3.jpeg" class="h-40"></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+
+<section>
+    <div class="container mx-auto w-full">
+        <owl-carousel-o [options]="customOptions">
+            @for (category of catergoriesData; track category._id) {
+           
+              <ng-template carouselSlide [id]="category._id">
+                <img [src]="category.image" class="h-96" [alt]="category.name">
+              </ng-template>
+            }
+        
+          </owl-carousel-o>
+    </div>
+</section>
+<section>
+    <input [(ngModel)]="searchValue" type="text" placeholder="Search by Name " class="p-4 mx-auto block rounded w-[50%] my-3">
+  <div class="container mx-auto">
+        <div class="grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
+            @for (product of productsData | searchpipe: searchValue ; track product.id) {
+            <div class="product cursor-pointer p-4" >
+                <div>@if (wishlistProducts) {
+                    @if (wishlistProducts.includes(product._id)) {
+                    <i class="fa-solid hidden fa-heart text-3xl cursor-pointer hover:text-green-400" style="color: #ff0000;" (click)="deleteProductFromWishlist(product.id)"></i>
+                }@else {
+                    <i class="fa-regular hidden fa-heart text-3xl cursor-pointer hover:text-green-400" (click)="addProductToWishlist(product.id)"></i>
+                }}@else {<i class="fa-regular hidden fa-heart text-3xl cursor-pointer hover:text-green-400" (click)="addProductToWishlist(product.id)"></i>}
+            </div>
+                <div [routerLink]="['/product-details',product._id]" >
+                <div class="mt-4">
+                    <img [src]="product.imageCover" [alt]="product.title">
+                </div>
+                <div class="mt-4">
+                    <h2 class="text-main">{{product.category.name}}</h2>
+                    <h1 class="font-black">{{product.title.split(' ').slice(0,3).join(' ')}}</h1>
+                </div>
+                <div class="mt-4 flex flex-wrap justify-between">
+                    <h3>{{product.price}}</h3>
+                    <span><i class="rating-color fa-solid fa-star"></i>{{product.ratingsAverage}}</span>
+                </div>
+            </div>
+                <div class="mt-4">
+                    <button (click)="AddToCart(product.id)" class="btn-main w-3/4 mx-auto block">+Add to cart</button>
+                </div>
+            </div>
+            }
+        </div>
+    </div>
+</section>

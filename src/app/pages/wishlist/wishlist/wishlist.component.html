@@ -1,0 +1,33 @@
+<section>
+    <div class="grid grid-cols-1 gap-3 md:mt-5">
+        @for(product of wishlistProducts;track product._id){
+
+            <div class="product bg-[#f6f6f6] flex flex-col md:flex-row items-center md:gap-5 rounded-lg border border-[#ccc] overflow-hidden">
+                <div class="image w-full md:w-[10%]">
+                  <img loading="lazy" [src]="product.imageCover" class="w-full h-[200px] md:h-[100px]" alt="product image" />
+                </div>
+                <div class="flex flex-1 flex-col md:flex-row gap-5 md:gap-0 w-full justify-between items-center p-4">
+                  <div class="content w-full">
+                    <h2 class="text-green-600 font-medium mb-2"> {{product.title}} </h2>
+                    <div class="flex justify-between md:justify-start gap-5">
+                      <div class="price">
+                        <h3 class="text-gray-600 font-medium"> {{product.price}} </h3>
+                        
+                      </div>
+                      <button (click)="deleteProductFromWishlist(product.id)"><i class="fa-solid fa-trash text-green-600 text-[18px]"></i></button>
+                    </div>
+                  </div>
+                  <button (click)="AddToCart(product.id)" class="p-2 w-full md:w-[15%] bg-green-600 text-white rounded-lg">Add to Cart </button>
+                </div>
+              </div>
+            } @empty {
+              <div class="flex justify-center items-center h-full">
+                <p class="text-red-600 text-2xl font-medium">the wishlist is empty</p>
+              </div>
+            }
+
+        
+        </div>
+
+
+        </section>

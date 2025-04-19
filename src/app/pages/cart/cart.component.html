@@ -1,0 +1,42 @@
+
+    <section class="bg-slate-100 rounded-md shadow-md p-4 my-4 mx-auto w-2/3">
+        <h1 class="font-bold text-3xl my-3">ShopCart:</h1>
+        <div class="flex justify-between">
+        <h1 class="font-bold text-2xl text-emerald-400 my-3">TotalCartPrice:@if (cartData!=null) {<span>{{cartData.totalCartPrice|currency: 'GBP'}}</span>}</h1>
+        <button (click)="clearCart()" class=" text-red-600 hover:bg-red-600 rounded hover:text-white ">
+            ClearCart
+          </button>
+        </div>
+        @if (cartData!=null) {
+        <div class="container w-[90%] mx-auto">
+        @for (product of cartData.products; track product.product) {
+            <div class="flex flex-wrap justify-between items-center py-2 border-b-4 border-gray-400">
+                <div class="w-full sm:w-1/5">
+                    <div class="p-img">
+                        <img class="w-full object-contain" [src]="product.product.imageCover" [alt]="product.product.title">
+                    </div>
+                </div>
+                    <div class="w-full sm:w-1/2">
+                        <div class="p-desc  ">
+                            <h1 class="font-black my-3 text-2xl">{{product.product.title}}</h1>
+                            <h2 class="font-black my-3 text-2xl text-emerald-400">{{product.price|currency: 'GBP'}}</h2>
+                            <h3 (click)="DeleteCartItem(product.product.id)" class="text-emerald-400 my-3 cursor-pointer">Remove <span><i class="fa-solid fa-trash"></i></span></h3>
+                        </div>
+                    </div>
+                    <div class="w-full sm:w-1/5">
+                        <div class="count flex justify-between text-emerald-400 text-xl">
+                            <span ><i (click)="UpdateCartProductQuantity(product.product.id,product.count+1)" class="fa-solid fa-circle-plus cursor-pointer"></i></span>
+                            <h3>{{product.count}}</h3>
+                            @if (product.count>1) {<span ><i (click)="UpdateCartProductQuantity(product.product.id,product.count-1)" class="fa-solid fa-circle-minus cursor-pointer"></i></span>}
+                        </div>
+                    </div>
+                
+            </div>
+        }
+        </div>
+    }
+    @if (cartData!.products.length>0) {<div>
+        <button [routerLink]="['/checkout',cartData!._id]" class="btn-main w-full mt-3">Check Out</button>
+    </div>}  
+    
+      </section>
