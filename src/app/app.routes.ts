@@ -20,15 +20,9 @@ export const routes: Routes = [
         {path:"products",loadComponent:()=>import('./pages/products/products.component').then((c)=>c.ProductsComponent),title:'products'},
         {path:"cart",loadComponent:()=>import('./pages/cart/cart.component').then((c)=>c.CartComponent),title:'cart'},
         {path:"categories",loadComponent:()=>import('./pages/categories/categories.component').then((c)=>c.CategoriesComponent),title:'categories'},
-        {path:"product-details/:p_id",loadComponent:()=>import('./pages/productdetails/productdetails.component').then((c)=>c.ProductdetailsComponent),title:'productdetails',data: {
-  prerender: false
-}
-},
+        {path:"product-details/:p_id",loadComponent:()=>import('./pages/productdetails/productdetails.component').then((c)=>c.ProductdetailsComponent),title:'productdetails'},
         {path:"Brands",loadComponent:()=>import('./pages/brands/brands.component').then((c)=>c.BrandsComponent),title:'brands'},
-        {path:"checkout/:c_id",loadComponent:()=>import('./pages/checkout/checkout.component').then((c)=>c.CheckoutComponent),title:'checkout',data: {
-  prerender: false
-}
-},
+        {path:"checkout/:c_id",loadComponent:()=>import('./pages/checkout/checkout.component').then((c)=>c.CheckoutComponent),title:'checkout'},
         {path:"allorders",loadComponent:()=>import('./pages/allorders/allorders.component').then((c)=>c.AllordersComponent),title:'allorders'},
         {path:"wishlist",loadComponent:()=>import('./pages/wishlist/wishlist/wishlist.component').then((c)=>c.WishlistComponent),title:'wishlist'}
        
